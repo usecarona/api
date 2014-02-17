@@ -6,12 +6,10 @@
  * @package api\components
  * @filesource
  */
-Yii::import('application.modules.pas.modules.autenticacao.models.Token');
 
 /**
  * Class utilized for to do authentication with api system.
  * Implementation realized with base in RFC 6749 (OAuth2) items 4.3, 4.4, 6, 7.1 ...
- * @author Gustavo Sávio <gustavo.savio@cotacoesecompras.com.br>
  */
 class Authentication
 {
