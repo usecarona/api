@@ -8,7 +8,7 @@
  */
 $basePath = dirname(__FILE__) . DIRECTORY_SEPARATOR . '..';
 
-Yii::setPathOfAlias('com', getcwd() . '/protected/components');
+Yii::setPathOfAlias('com', getcwd() . DIRECTORY_SEPARATOR . 'protected' . DIRECTORY_SEPARATOR . 'components');
 
 return array(
 	'basePath' => $basePath,
@@ -46,7 +46,7 @@ return array(
 			//'connectionString' => 'mysql:host=localhost;dbname=usecarona',
 			//'username' => 'usecarona',
 			//'password' => 'usecarona41',
-			'connectionString' => 'psql:host=localhost;dbname=api',
+			'connectionString' => 'pgsql:host=localhost;dbname=api',
 			'username' => 'postgres',
 			'password' => '',
 			'charset' => 'utf8',
@@ -54,9 +54,6 @@ return array(
 		),
 		'errorHandler' => array(
 			'errorAction' => 'app/error',
-			'<controller:\w+>/<id:\d+>' => '<controller>/view',
-			'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-			'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
 		),
 		'log' => array(
 			'class' => 'CLogRouter',
