@@ -124,8 +124,9 @@ class HttpResponse extends CApplicationComponent
      */
     public function sendResponse($response)
     {
-        if (is_null($response))
+        if (is_null($response)) {
             throw new CHttpException(404, Yii::t('rest', $this->getStatusCodeMessage(404)));
+        }
 
         $mediaTypes = Yii::app()->request->getPreferredMediaTypes();
 

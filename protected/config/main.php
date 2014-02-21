@@ -33,7 +33,7 @@ return array(
 		'urlManager' => array(
 			'urlFormat' => 'path',
 			'rules' => array (
-				array('app/error' => 'error'), 
+				array('app/error', 'pattern' => 'error'), 
 				array('<controller>/list', 'pattern' => '<controller>', 'verb' => 'GET'),
 				array('<controller>/view', 'pattern' => '<controller>/<id:\w+(-\w+)*>', 'verb' => 'GET'),
 				array('<controller>/create', 'pattern' => '<controller>/', 'verb' => 'POST'),
