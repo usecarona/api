@@ -10,25 +10,15 @@
  * @property string $senha
  * @property string $nome
  * @property string $celular
- * @property boolean $ativo
+ * @property integer $ativo
  *
  * The followings are the available model relations:
- * @property Token[] $tokens
- * @property CartaoCredito[] $cartaoCreditos
  * @property Carro[] $carros
+ * @property CartaoCredito[] $cartaoCreditos
+ * @property Token[] $tokens
  */
 class Usuario extends CActiveRecord
 {
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
-	 * @return Usuario the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
-
 	/**
 	 * @return string the associated database table name
 	 */
@@ -46,12 +36,13 @@ class Usuario extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('email, senha, nome, celular', 'required'),
+			array('ativo', 'numerical', 'integerOnly'=>true),
+			array('uid_facebook', 'length', 'max'=>20),
 			array('email, senha', 'length', 'max'=>45),
 			array('nome', 'length', 'max'=>100),
 			array('celular', 'length', 'max'=>15),
-			array('uid_facebook, ativo', 'safe'),
 			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
+			// @todo Please remove those attributes that should not be searched.
 			array('id_usuario, uid_facebook, email, senha, nome, celular, ativo', 'safe', 'on'=>'search'),
 		);
 	}
@@ -64,9 +55,9 @@ class Usuario extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'tokens' => array(self::HAS_MANY, 'Token', 'id_usuario'),
-			'cartaoCreditos' => array(self::HAS_MANY, 'CartaoCredito', 'id_usuario'),
 			'carros' => array(self::HAS_MANY, 'Carro', 'id_usuario'),
+			'cartaoCreditos' => array(self::HAS_MANY, 'CartaoCredito', 'id_usuario'),
+			'tokens' => array(self::HAS_MANY, 'Token', 'id_usuario'),
 		);
 	}
 
@@ -88,12 +79,19 @@ class Usuario extends CActiveRecord
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 *
+	 * Typical usecase:
+	 * - Initialize the model fields with values from filter form.
+	 * - Execute this method to get CActiveDataProvider instance which will filter
+	 * models according to data in model fields.
+	 * - Pass data provider to CGridView, CListView or any similar widget.
+	 *
+	 * @return CActiveDataProvider the data provider that can return the models
+	 * based on the search/filter conditions.
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
 
@@ -108,5 +106,16 @@ class Usuario extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	/**
+	 * Returns the static model of the specified AR class.
+	 * Please note that you should have this exact method in all your CActiveRecord descendants!
+	 * @param string $className active record class name.
+	 * @return Usuario the static model class
+	 */
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
 	}
 }

@@ -35,7 +35,7 @@ class Controller extends CController
 	 */
 	public function actionList()
 	{
-		throw new CHttpException(501, Yii::t('rest', Yii::app()->response->getStatusCodeMessage(501)));
+		
 	}
 
 	/**
@@ -44,9 +44,9 @@ class Controller extends CController
 	 * {@source}
 	 * @throws CHttpException
 	 */
-	public function actionView()
+	public function actionView($id)
 	{
-		throw new CHttpException(501, Yii::t('rest', Yii::app()->response->getStatusCodeMessage(501)));
+		
 	}
 
 	/**
@@ -57,7 +57,7 @@ class Controller extends CController
 	 */
 	public function actionCreate()
 	{
-		throw new CHttpException(501, Yii::t('rest', Yii::app()->response->getStatusCodeMessage(501)));
+		
 	}
 
 	/**
@@ -66,9 +66,9 @@ class Controller extends CController
 	 * {@source}
 	 * @throws CHttpException
 	 */
-	public function actionUpdate()
+	public function actionUpdate($id)
 	{
-		throw new CHttpException(501, Yii::t('rest', Yii::app()->response->getStatusCodeMessage(501)));
+		
 	}
 
 	/**
@@ -77,7 +77,18 @@ class Controller extends CController
 	 * {@source}
 	 * @throws CHttpException
 	 */
-	public function actionDelete()
+	public function actionDelete($id)
+	{
+		
+	}
+      
+	/**
+	 * Método padrão para utilizar nas actions para sobrescrevê-las para que não sejam expostas.
+	 * 
+	 * {@source}
+	 * @throws CHttpException
+	 */
+	protected function notImplemented()
 	{
 		throw new CHttpException(501, Yii::t('rest', Yii::app()->response->getStatusCodeMessage(501)));
 	}

@@ -27,30 +27,27 @@ return array(
 		),
 	),
 	'components' => array(
-		'user' => array(
-			'allowAutoLogin' => true,
-		),
+//		'user' => array(
+//			'allowAutoLogin' => true,
+//		),
 		'urlManager' => array(
 			'urlFormat' => 'path',
 			'rules' => array (
 				array('app/error', 'pattern' => 'error'), 
-				array('<controller>/list', 'pattern' => '<controller>', 'verb' => 'GET'),
-				array('<controller>/view', 'pattern' => '<controller>/<id:\w+(-\w+)*>', 'verb' => 'GET'),
-				array('<controller>/create', 'pattern' => '<controller>/', 'verb' => 'POST'),
-				array('<controller>/update', 'pattern' => '<controller>/<id:\w+(-\w+)*>', 'verb' => 'PUT'),
-				array('<controller>/delete', 'pattern' => '<controller>/<id:\w+(-\w+)*>', 'verb' => 'DELETE'),
+//				array('<controller>/list', 'pattern' => '<controller>', 'verb' => 'GET'),
+//				array('<controller>/view', 'pattern' => '<controller>/<id:\w+(-\w+)*>', 'verb' => 'GET'),
+//				array('<controller>/create', 'pattern' => '<controller>/', 'verb' => 'POST'),
+//				array('<controller>/update', 'pattern' => '<controller>/<id:\w+(-\w+)*>', 'verb' => 'PUT'),
+//				array('<controller>/delete', 'pattern' => '<controller>/<id:\w+(-\w+)*>', 'verb' => 'DELETE'),
 			),
 		),
 		'db' => array(
 			'class' => 'CDbConnection',
-			//'connectionString' => 'mysql:host=localhost;dbname=usecarona',
-			//'username' => 'usecarona',
-			//'password' => 'usecarona41',
-			'connectionString' => 'pgsql:host=localhost;dbname=api',
-			'username' => 'postgres',
+			'connectionString' => 'mysql:host=localhost;dbname=usecarona',
+			'username' => 'root',
 			'password' => '',
 			'charset' => 'utf8',
-			//'emulatePrepare' => true, 
+			'emulatePrepare' => true, 
 		),
 		'errorHandler' => array(
 			'errorAction' => 'app/error',

@@ -15,29 +15,19 @@
  * @property integer $quantidade_passageiros
  * @property integer $quantidade_portas
  * @property string $cor
- * @property boolean $wifi
- * @property boolean $ar_condicionado
- * @property boolean $som
- * @property boolean $dvd
- * @property boolean $airbag
- * @property boolean $ativo
- * @property boolean $liberado
+ * @property integer $wifi
+ * @property integer $ar_condicionado
+ * @property integer $som
+ * @property integer $dvd
+ * @property integer $airbag
+ * @property integer $ativo
+ * @property integer $liberado
  *
  * The followings are the available model relations:
  * @property Usuario $idUsuario
  */
 class Carro extends CActiveRecord
 {
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
-	 * @return Carro the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
-
 	/**
 	 * @return string the associated database table name
 	 */
@@ -55,13 +45,13 @@ class Carro extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('id_usuario, numero_chassi, cpf_proprietario, marca, modelo, ano, placa, cor', 'required'),
-			array('quantidade_passageiros, quantidade_portas', 'numerical', 'integerOnly'=>true),
+			array('quantidade_passageiros, quantidade_portas, wifi, ar_condicionado, som, dvd, airbag, ativo, liberado', 'numerical', 'integerOnly'=>true),
+			array('id_usuario', 'length', 'max'=>20),
 			array('numero_chassi, marca, modelo, placa, cor', 'length', 'max'=>45),
 			array('cpf_proprietario', 'length', 'max'=>11),
 			array('ano', 'length', 'max'=>4),
-			array('wifi, ar_condicionado, som, dvd, airbag, ativo, liberado', 'safe'),
 			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
+			// @todo Please remove those attributes that should not be searched.
 			array('id_carro, id_usuario, numero_chassi, cpf_proprietario, marca, modelo, ano, placa, quantidade_passageiros, quantidade_portas, cor, wifi, ar_condicionado, som, dvd, airbag, ativo, liberado', 'safe', 'on'=>'search'),
 		);
 	}
@@ -107,12 +97,19 @@ class Carro extends CActiveRecord
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 *
+	 * Typical usecase:
+	 * - Initialize the model fields with values from filter form.
+	 * - Execute this method to get CActiveDataProvider instance which will filter
+	 * models according to data in model fields.
+	 * - Pass data provider to CGridView, CListView or any similar widget.
+	 *
+	 * @return CActiveDataProvider the data provider that can return the models
+	 * based on the search/filter conditions.
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
 
@@ -138,5 +135,16 @@ class Carro extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	/**
+	 * Returns the static model of the specified AR class.
+	 * Please note that you should have this exact method in all your CActiveRecord descendants!
+	 * @param string $className active record class name.
+	 * @return Carro the static model class
+	 */
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
 	}
 }
